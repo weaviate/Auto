@@ -1,0 +1,14 @@
+datasets
+weaviate-client
+
+torch
+xformers
+transformers
+peft
+accelerate
+huggingface_hub
+bitsandbytes
+protobuf
+
+scipy
+einops
