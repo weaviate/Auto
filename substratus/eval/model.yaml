@@ -6,7 +6,7 @@ spec:
   env:
     HUGGING_FACE_HUB_TOKEN: "${{ secrets.ai.HUGGING_FACE_HUB_TOKEN }}"
   model:
-    name: wgqlg-withretrieval-schemasplit-train-80-3epochs
+    name: wgqlg-withretrieval-schemasplit-train-80-mistral
   params:
     hf_dataset: weaviate/WithoutRetrieval-SchemaSplit-Test-80
     push_to_hub: substratusai/wgql-WithRetrieval-SchemaSplit-Train-80-3epochs
