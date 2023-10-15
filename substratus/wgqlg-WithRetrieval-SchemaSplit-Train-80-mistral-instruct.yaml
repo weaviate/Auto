@@ -1,7 +1,7 @@
 apiVersion: substratus.ai/v1
 kind: Model
 metadata:
-  name: wgqlg-withretrieval-schemasplit-train-80-mistral-instruct
+  name: wgqlg-withretrieval-schemasplit-train-80-mistral-v2
 spec:
   image: substratusai/model-trainer-huggingface
   model:

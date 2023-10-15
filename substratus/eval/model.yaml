@@ -1,7 +1,7 @@
 apiVersion: substratus.ai/v1
 kind: Model
 metadata:
-  name: eval-test
+  name: eval-withretrieval-schemasplit-train-80-mistral
 spec:
   env:
     HUGGING_FACE_HUB_TOKEN: "${{ secrets.ai.HUGGING_FACE_HUB_TOKEN }}"
@@ -9,7 +9,7 @@ spec:
     name: wgqlg-withretrieval-schemasplit-train-80-mistral
   params:
     hf_dataset: weaviate/WithoutRetrieval-SchemaSplit-Test-80
-    push_to_hub: substratusai/wgql-WithRetrieval-SchemaSplit-Train-80-3epochs
+    push_to_hub: substratusai/wgql-WithRetrieval-SchemaSplit-Train-80-mistral
   resources:
     gpu:
       type: nvidia-l4
