@@ -20,5 +20,5 @@ RUN /venv/bin/python3 -m pip install flash-attn --no-build-isolation
 FROM ${BASE_IMAGE}
 ENV PATH="/venv/bin:$PATH"
 COPY --from=build /venv /venv
-COPY *.ipynb .
+COPY eval.ipynb .
 COPY eval.py .
