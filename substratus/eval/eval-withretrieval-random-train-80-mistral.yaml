@@ -1,0 +1,16 @@
+apiVersion: substratus.ai/v1
+kind: Model
+metadata:
+  name: eval-withretrieval-random-train-80-mistral
+spec:
+  env:
+    HUGGING_FACE_HUB_TOKEN: "${{ secrets.ai.HUGGING_FACE_HUB_TOKEN }}"
+  model:
+    name: wgqlg-withretrieval-random-train-80-mistral
+  params:
+    hf_dataset: weaviate/WithoutRetrieval-Random-Test-80
+    push_to_hub: substratusai/wgql-WithRetrieval-Random-Train-80-mistral
+  resources:
+    gpu:
+      type: nvidia-l4
+      count: 1
