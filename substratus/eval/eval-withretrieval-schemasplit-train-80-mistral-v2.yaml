@@ -10,6 +10,23 @@ spec:
   params:
     hf_dataset: weaviate/WithoutRetrieval-SchemaSplit-Test-80
     push_to_hub: substratusai/wgql-WithRetrieval-SchemaSplit-Train-80-mistral-instruct
+    prompt_template: |
+      <s>[INST]
+      Your task is to write GraphQL for the Natural Language Query provided. Use the provided API reference and Schema to generate the GraphQL. The GraphQL should be valid for Weaviate.
+
+      Only use the API reference to understand the syntax of the request.
+
+      ## Natural Language Query
+      {nlcommand}
+
+      ## Schema
+      {schema}
+
+      ## API reference
+      {apiRef}
+
+      [/INST]
+
   resources:
     gpu:
       type: nvidia-l4
