@@ -1,7 +1,7 @@
 apiVersion: substratus.ai/v1
 kind: Model
 metadata:
-  name: wgqlg-withretrieval-schemasplit-train-80
+  name: wgqlg-withretrieval-schemasplit-train-80-v4
 spec:
   # image: substratusai/model-trainer-huggingface
   build:
@@ -21,7 +21,11 @@ spec:
     push_to_hub: substratusai/wgql-WithRetrieval-SchemaSplit-Train-80
     save_steps: 50
     logging_steps: 50
-    target_modules": "q_proj, up_proj, o_proj, k_proj, down_proj, gate_proj, v_proj, embed_tokens, lm_head"
+    warmup_steps: 100
+    per_device_train_batch_size: 1
+    per_device_eval_batch_size: 1
+    target_modules: "q_proj, up_proj, o_proj, k_proj, down_proj, gate_proj, v_proj"
+    modules_to_save: "embed_tokens, lm_head"
     prompt_template: |
       ## Instruction
       Your task is to write GraphQL for the Natural Language Query provided. Use the provided API reference and Schema to generate the GraphQL. The GraphQL should be valid for Weaviate.
@@ -39,7 +43,23 @@ spec:
 
       ## Answer
       {output}
+    inference_prompt_template: |
+      ## Instruction
+      Your task is to write GraphQL for the Natural Language Query provided. Use the provided API reference and Schema to generate the GraphQL. The GraphQL should be valid for Weaviate.
 
+      Only use the API reference to understand the syntax of the request.
+
+      ## Natural Language Query
+      {nlcommand}
+
+      ## Schema
+      {schema}
+
+      ## API reference
+      {apiRef}
+
+      ## Answer
+      ```graphql
   resources:
     gpu:
       count: 4

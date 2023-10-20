@@ -22,3 +22,4 @@ ENV PATH="/venv/bin:$PATH"
 COPY --from=build /venv /venv
 COPY eval.ipynb .
 COPY eval.py .
+COPY ToySchemas ./ToySchemas
