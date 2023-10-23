@@ -1,7 +1,7 @@
 apiVersion: substratus.ai/v1
 kind: Model
 metadata:
-  name: wgqlg-withretrieval-random-train-80
+  name: wgqlg-withretrieval-random-train-80-v2
 spec:
   # image: substratusai/model-trainer-huggingface
   build:

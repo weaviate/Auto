@@ -1,14 +1,14 @@
 apiVersion: substratus.ai/v1
 kind: Model
 metadata:
-  name: wgqlg-withoutretrieval-schemasplit-train-80-v2
+  name: wgqlg-withoutretrieval-schemasplit-train-80
 spec:
-  # image: substratusai/model-trainer-huggingface
-  build:
-    git:
-      url: https://github.com/substratusai/images
-      branch: update-hyper-params
-      path: model-trainer-huggingface
+  image: substratusai/model-trainer-huggingface:pr-49
+    # build:
+    #   git:
+    #     url: https://github.com/substratusai/images
+    #     path: model-trainer-huggingface
+    #     branch: fix-model-trainer-checkpoint-path
   model:
     name: llama-2-7b
   env:
@@ -16,16 +16,11 @@ spec:
   params:
     # See HuggingFace transformers.TrainingArguments for all parameters
     # https://huggingface.co/docs/transformers/main_classes/trainer#transformers.TrainingArguments
-    num_train_epochs: 3
+    num_train_epochs: 1
     dataset_urls: https://huggingface.co/datasets/weaviate/WithoutRetrieval-SchemaSplit-Train-80/resolve/main/WithoutRetrieval-SchemaSplit-Train-80.json
     push_to_hub: substratusai/wgql-WithoutRetrieval-SchemaSplit-Train-80
-    save_steps: 50
-    logging_steps: 50
-    warmup_steps: 100
-    per_device_train_batch_size: 1
-    per_device_eval_batch_size: 1
-    target_modules: "q_proj, up_proj, o_proj, k_proj, down_proj, gate_proj, v_proj"
-    modules_to_save: "embed_tokens, lm_head"
+    # Save to checkpoint every 5 steps for a dataset with ~70 steps total
+    save_steps: 5
     prompt_template: |
       ## Instruction
       Your task is to write GraphQL for the Natural Language Query provided. Use the provided Schema to generate the GraphQL. The GraphQL should be valid for Weaviate.
@@ -38,6 +33,7 @@ spec:
 
       ## Answer
       {output}
+
   resources:
     gpu:
       count: 4
